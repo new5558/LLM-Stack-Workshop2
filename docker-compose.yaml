@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: qdrant
+    ports:
+      - "6333:6333"
+    volumes:
+      - ./qdrant_storage:/qdrant/storage:z
+
+  ingest:
+    build: .
+    container_name: ingest_squad
+    depends_on:
+      - qdrant
+    environment:
+      - QDRANT_HOST=qdrant
+    command: python ingest.py
+    env_file:
+      - .env
+
+  search-ui:
+    build: .
+    container_name: search_ui
+    ports:
+      - "8501:8501"
+    depends_on:
+      - qdrant
+    environment:
+      - QDRANT_HOST=qdrant
+    command: streamlit run app_search.py --server.address=0.0.0.0
+    env_file:
+      - .env
+
+  rag-ui:
+    build: .
+    container_name: rag_ui
+    ports:
+      - "8502:8502"
+    depends_on:
+      - qdrant
+    environment:
+      - QDRANT_HOST=qdrant
+    command: streamlit run rag_app.py --server.port=8502 --server.address=0.0.0.0
+    env_file:
+      - .env
