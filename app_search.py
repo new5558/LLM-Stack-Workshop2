@@ -20,12 +20,7 @@ client_or = OpenAI(
 
 def get_embedding(text):
     """Fetch embedding from OpenRouter using OpenAI SDK."""
-    response = client_or.embeddings.create(
-        model="nvidia/llama-nemotron-embed-vl-1b-v2:free",
-        input=text,
-        encoding_format="float",
-    )
-    return response.data[0].embedding
+    ...
 
 
 query = st.text_input(
