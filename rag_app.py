@@ -59,7 +59,7 @@ def rerank_documents(query, points):
     ...
     """
     response = client_or.chat.completions.create(
-        model="qwen/qwen3-next-80b-a3b-instruct:free",
+        model="nvidia/nemotron-3-nano-30b-a3b:free",
         messages=[
             {"role": "system", "content": "You are a helpful reranking assistant."},
             {"role": "user", "content": prompt}
