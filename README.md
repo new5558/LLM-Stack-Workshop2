@@ -24,7 +24,8 @@ docker-compose up --build
 ### 1) Make App Search Works
 - Fix ingest.py
 - Fix app_search.py
-- Rerun `docker-compose up --build` until you can do App Search via http://localhost:8501
+- Rerun `docker-compose up --build` until you can do App Search via http://localhost:8501.
+- App Rag Service will crash. you can ignore it for this step.
 ### 2) Make RAG App Works
 - Fix rag_app.py
 - Rerun `docker-compose up --build` until you can do RAG App via http://localhost:8502
