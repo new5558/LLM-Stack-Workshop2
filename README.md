@@ -20,6 +20,15 @@ The entire stack can be started with:
 docker-compose up --build
 ```
 
+## TODO
+### 1) Make App Search Works
+- Fix ingest.py
+- Fix app_search.py
+- Rerun `docker-compose up --build` until you can do App Search via http://localhost:8501
+### 2) Make RAG App Works
+- Fix rag_app.py
+- Rerun `docker-compose up --build` until you can do RAG App via http://localhost:8502
+
 ## 🏗️ Services
 
 | Service | Port | Description |
