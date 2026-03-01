@@ -46,22 +46,19 @@ def main():
 
     for i, context in enumerate(tqdm(context_store)):
         text = context
-        try:
-            vector = ...
-            client.upsert(
-                collection_name="squad_collection",
-                points=[
-                    models.PointStruct(
-                        id=i,
-                        vector=vector,
-                        payload={
-                            "context": text,
-                        },
-                    )
-                ],
-            )
-        except Exception as e:
-            print(f"Error: {e}")
+        vector = get_embedding(text, client)
+        client.upsert(
+            collection_name="squad_collection",
+            points=[
+                models.PointStruct(
+                    id=i,
+                    vector=vector,
+                    payload={
+                        "context": text,
+                    },
+                )
+            ],
+        )
 
 
 if __name__ == "__main__":
