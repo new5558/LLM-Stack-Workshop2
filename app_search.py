@@ -20,7 +20,8 @@ client_or = OpenAI(
 
 def get_embedding(text):
     """Fetch embedding from OpenRouter using OpenAI SDK."""
-    ...
+    # Hint: nvidia/llama-nemotron-embed-vl-1b-v2:free
+    # Hint 2: ChatCompletion API
 
 
 query = st.text_input(
@@ -43,7 +44,6 @@ if query:
                 else:
                     for i, hit in enumerate(results.points):
                         with st.expander(f"Result {i+1} (Score: {hit.score:.4f})"):
-                            st.write(f"**Question:** {hit.payload.get('question')}")
                             st.write(f"**Context:** {hit.payload.get('context')}")
             except Exception as e:
                 st.error(f"Error: {e}")
