@@ -59,28 +59,21 @@ def rerank_documents(query, points):
     ...
     """
     response = client_or.chat.completions.create(
-        model="openrouter/free",
+        model="qwen/qwen3-next-80b-a3b-instruct:free",
         messages=[
             {"role": "system", "content": "You are a helpful reranking assistant."},
             {"role": "user", "content": prompt}
         ],
         temperature=0,
+        tools = ... # Let the rerank result [1,0,2,...] be saved by tool calling
     )
 
-    content = response.choices[0].message.content
+    tool_calls - response.messages[-1].tool_calls # Hint Follow Tool Calling COlab
 
-    # Extract JSON list
-    match = re.search(r'\[[\d,\s]+\]', content)
 
-    if match:
-        indices = json.loads(match.group())
-        reranked = [points[i] for i in indices]
-        return reranked
-
-    else:
-        print("Reranker returned invalid format. Falling back.")
-        return points
-
+    indices = ... # Get rerank results
+    reranked = [points[i] for i in indices]
+    return reranked
 
 def run_rag(query):
     # 1. Retrieval

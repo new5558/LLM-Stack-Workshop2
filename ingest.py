@@ -16,7 +16,8 @@ client_or = OpenAI(
 
 def get_embedding(text):
     """Fetch embedding from OpenRouter using OpenAI SDK."""
-    ...
+    # Hint: nvidia/llama-nemotron-embed-vl-1b-v2:free
+    # Hint 2: ChatCompletion API
 
 
 def main():
@@ -36,12 +37,17 @@ def main():
         vectors_config=models.VectorParams(size=2048, distance=models.Distance.COSINE),
     )
 
-    dataset = load_dataset("squad", split="train[:10]")
-
+    dataset = load_dataset("squad", split="train[:100]")
+    context_store = set()
     for i, item in enumerate(tqdm(dataset)):
-        text = f"Question: {item['question']} Context: {item['context']}"
+        context = item['context']
+        if context not in context_store:
+            context_store.add(context)
+
+    for i, context in enumerate(tqdm(context_store)):
+        text = context
         try:
-            vector = get_embedding(text)
+            vector = ...
             client.upsert(
                 collection_name="squad_collection",
                 points=[
@@ -49,8 +55,7 @@ def main():
                         id=i,
                         vector=vector,
                         payload={
-                            "context": item["context"],
-                            "question": item["question"],
+                            "context": text,
                         },
                     )
                 ],
