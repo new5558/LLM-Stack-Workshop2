@@ -68,7 +68,7 @@ def rerank_documents(query, points):
         tools = ... # TODO: Add Tools, Let the rerank result [1,0,2,...] be saved by tool calling
     )
 
-    tool_calls - response.messages[-1].tool_calls # Hint Follow Tool Calling Colab (Colab Notebook 2)
+    tool_calls = response.message[-1].tool_calls # Hint Follow Tool Calling Colab (Colab Notebook 2)
 
 
     indices = ... # Get rerank results
