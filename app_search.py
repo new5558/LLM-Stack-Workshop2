@@ -21,7 +21,7 @@ client_or = OpenAI(
 def get_embedding(text):
     """Fetch embedding from OpenRouter using OpenAI SDK."""
     # Hint: nvidia/llama-nemotron-embed-vl-1b-v2:free
-    # Hint 2: ChatCompletion API
+    # Hint 2: Check Colab Code
 
 
 query = st.text_input(
