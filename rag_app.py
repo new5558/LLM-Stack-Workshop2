@@ -10,10 +10,10 @@ st.title("Workshop 2: Build our own RAG application: RAG")
 
 api_key = os.getenv("OPENROUTER_API_KEY")
 qdrant_host = os.getenv("QDRANT_HOST", "localhost")
-client = QdrantClient(host=qdrant_host, port=6333)
+client_db = QdrantClient(host=qdrant_host, port=6333)
 
 SYSTEM_PROMT = """
-... Edit the prompt so that system perform as RAG agent
+... TODO: Edit the prompt so that system perform as RAG agent
 # Hint: Check Colab Code
 """
 
@@ -25,7 +25,7 @@ client_or = OpenAI(
 
 
 def get_embedding(text):
-    """Fetch embedding from OpenRouter using OpenAI SDK."""
+    """TODO: Fetch embedding from OpenRouter using OpenAI SDK."""
     # Hint: nvidia/llama-nemotron-embed-vl-1b-v2:free
     # Hint 2: Check Colab Code
 
@@ -52,7 +52,7 @@ def rerank_documents(query, points):
     )
 
     prompt = f"""
-    ... Edit the prompt to rerank the docunments based on the query.
+    ... TODO: Edit the prompt to rerank the docunments based on the query.
     # Hint: Check Colab Code
     {query}
     {doc_list}
@@ -65,7 +65,7 @@ def rerank_documents(query, points):
             {"role": "user", "content": prompt}
         ],
         temperature=0,
-        tools = ... # Let the rerank result [1,0,2,...] be saved by tool calling
+        tools = ... # TODO: Add Tools, Let the rerank result [1,0,2,...] be saved by tool calling
     )
 
     tool_calls - response.messages[-1].tool_calls # Hint Follow Tool Calling Colab (Colab Notebook 2)
@@ -77,13 +77,13 @@ def rerank_documents(query, points):
 
 def run_rag(query):
     # 1. Retrieval
-    vector = ...
-    results = client.query_points(
+    vector = ... # TODO: Get vector from query
+    results = client_db.query_points(
         collection_name="squad_collection", query=vector, limit=5
     )
     points = results.points
 
-    # 2. Rerank
+    # 2. Rerank TODO: Complete the code
     # Hint: You can do the full rag pipeline without Reranker. Comment out when you want to do this part.
     # points = rerank_documents(query, [point for point in points])
     
@@ -94,7 +94,7 @@ def run_rag(query):
         # TODO: Add context to search_result
 
     prompt = f"""
-    ... Edit the prompt and add question and context we got from reranker...
+    ... TODO: Edit the prompt and add question and context we got from reranker...
     ...
     # Hint: Check Colab Code
     """

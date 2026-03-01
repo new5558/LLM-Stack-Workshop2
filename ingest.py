@@ -15,7 +15,7 @@ client_or = OpenAI(
 
 
 def get_embedding(text):
-    """Fetch embedding from OpenRouter using OpenAI SDK."""
+    """TODO: Fetch embedding from OpenRouter using OpenAI SDK."""
     # Hint: nvidia/llama-nemotron-embed-vl-1b-v2:free
     # Hint 2: Check Colab Code
 
@@ -23,16 +23,16 @@ def get_embedding(text):
 def main():
     qdrant_host = os.getenv("QDRANT_HOST", "localhost")
 
-    client = QdrantClient(host=qdrant_host, port=6333)
+    client_db = QdrantClient(host=qdrant_host, port=6333)
 
     for _ in range(10):
         try:
-            client.get_collections()
+            client_db.get_collections()
             break
         except:
             time.sleep(2)
 
-    client.recreate_collection(
+    client_db.recreate_collection(
         collection_name="squad_collection",
         vectors_config=models.VectorParams(size=2048, distance=models.Distance.COSINE),
     )
@@ -46,8 +46,8 @@ def main():
 
     for i, context in enumerate(tqdm(context_store)):
         text = context
-        vector = get_embedding(text, client)
-        client.upsert(
+        vector = ... # TODO: Complete this code
+        client_db.upsert(
             collection_name="squad_collection",
             points=[
                 models.PointStruct(

@@ -8,7 +8,7 @@ st.title("Workshop 2: Build our own RAG application: Search")
 
 api_key = os.getenv("OPENROUTER_API_KEY")
 qdrant_host = os.getenv("QDRANT_HOST", "localhost")
-client = QdrantClient(host=qdrant_host, port=6333)
+client_db = QdrantClient(host=qdrant_host, port=6333)
 
 
 # Initialize OpenAI client for OpenRouter
@@ -19,7 +19,7 @@ client_or = OpenAI(
 
 
 def get_embedding(text):
-    """Fetch embedding from OpenRouter using OpenAI SDK."""
+    """TODO: Fetch embedding from OpenRouter using OpenAI SDK."""
     # Hint: nvidia/llama-nemotron-embed-vl-1b-v2:free
     # Hint 2: Check Colab Code
 
@@ -35,7 +35,7 @@ if query:
         with st.spinner("Searching..."):
             try:
                 vector = get_embedding(query)
-                results = client.query_points(
+                results = client_db.query_points(
                     collection_name="squad_collection", query=vector, limit=3
                 )
 
