@@ -68,7 +68,7 @@ def rerank_documents(query, points):
         tools = ... # Let the rerank result [1,0,2,...] be saved by tool calling
     )
 
-    tool_calls - response.messages[-1].tool_calls # Hint Follow Tool Calling COlab
+    tool_calls - response.messages[-1].tool_calls # Hint Follow Tool Calling Colab (Colab Notebook 2)
 
 
     indices = ... # Get rerank results
@@ -81,9 +81,11 @@ def run_rag(query):
     results = client.query_points(
         collection_name="squad_collection", query=vector, limit=5
     )
+    points = results.points
 
     # 2. Rerank
-    points = rerank_documents(query, [point for point in results.points])
+    # Hint: You can do the full rag pipeline without Reranker. Comment out when you want to do this part.
+    # points = rerank_documents(query, [point for point in points])
     
     search_result = []
     for i, hit in enumerate(points):
