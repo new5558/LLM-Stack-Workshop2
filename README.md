@@ -1,4 +1,4 @@
-# Workshop 2: Minimal RAG & Search
+# Workshop 3: Minimal RAG & Search
 
 This workshop demonstrates how to build a Retrieval-Augmented Generation (RAG) system and a Search engine using **Qdrant**, **OpenRouter**, and **SQuAD** dataset.
 
